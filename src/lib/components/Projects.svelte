@@ -18,7 +18,7 @@
   href="#"
   transition:fly={{ y: 250, duration: 1000, delay: 1000 }}
 >
-  <div class="relative transition-all left-8 top-10 hover:top-6">
+  <div class="relative transition-all left-8 top-10 hover:-translate-y-4">
       <img src={Web} alt="web" class="w-full h-full" />
     </div>
   </a>
