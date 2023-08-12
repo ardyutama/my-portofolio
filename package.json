@@ -7,10 +7,12 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write  --plugin prettier-plugin-svelte ."
+    "format": "prettier --write  --plugin prettier-plugin-tailwindcss ."
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-node": "^1.3.1",
+    "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.20.4",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.28.0",
@@ -25,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "animate.css": "^4.1.1",
     "svelte-intersection-observer": "^0.10.1"
   }
 }

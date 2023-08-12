@@ -1,15 +1,21 @@
 <script>
-  import Project from "../components/Projects.svelte";
-  import Footer from "../components/Footer.svelte";
+  import Project from "$lib/components/Projects.svelte";
+
+  import { fade, fly, blur } from "svelte/transition";
+  import { onMount } from 'svelte';
+
+  let ready = false;
+  onMount(() => ready = true);
 </script>
 
 <main>
+  {#if ready}
   <div class="flex flex-col items-center gap-12">
-    <div class="flex flex-col gap-4 self-stretch">
-      <p class="text-heading-2 text-center font-bold pt-5">
+    <div class="flex flex-col self-stretch gap-4">
+      <p class="pt-5 font-bold text-center text-heading-2" transition:fly={{ y: 250, duration: 1000 }}>
         Hi there! <br />Ardy's Here.
       </p>
-      <p class="text-subheading-2 font-[700] text-center px-3">
+      <p class="px-3 font-medium text-center text-subheading-2" transition:fly={{ y: 250, duration: 1000, delay:500 }}>
         Passionate for Interactive, Impactful, and Great Website.
       </p>
     </div>
@@ -20,11 +26,10 @@
       <p class="text-[32px] text-center font-[700] text-white">
         Let’s Collaborate<br />For Something Great.
       </p>
-      <Project />
-      <Project />
+        <Project />
     </div>
-    <Footer />
   </div>
+  {/if}
 </main>
 
 <style lang="postcss">

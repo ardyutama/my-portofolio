@@ -1,12 +1,16 @@
 <script>
-  import Footer from "../../components/Footer.svelte";
-  import { fade, fly, blur } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import IntersectionObserver from "svelte-intersection-observer";
-
-  let element;
+  import { browser } from "$app/environment";
+  import { writable } from 'svelte/store'
+  import { setContext } from "svelte";
+  
   let node;
   let nodeExperiences;
-
+  let now;
+  // let value;
+  export const value = writable("main")
+  setContext('test', value)
   $: isTagActive = 0;
 
   const experiences = [
@@ -25,6 +29,7 @@
       ],
     },
   ];
+
   const contents = [
     {
       title: "Software Engineer",
@@ -42,30 +47,53 @@
         "I am a frontend engineer who is passionate about making code more accessible, creating technology to elevate people, and building community. Some technologies I enjoy working with include ReactJS, Jamstack (JavaScript, APIs + Markup) and GraphQL.",
     },
   ];
+
   let description = contents[0].description;
+
+  if (browser) {
+    now = document.getElementsByTagName("section")[0]?.id;
+
+    let sections = document.getElementsByTagName("section");
+
+    function CheckScroll(el, index, scroll) {
+      if (scroll > el.offsetTop && scroll <= sections[index + 1]?.offsetTop) {
+        now = el.id;
+      } else if (scroll > el.offsetTop && sections[index + 1] == undefined) {
+        now = el.id;
+      }
+    }
+    window.addEventListener("scroll", function (e) {
+      for (let i = 0; i < sections.length; i++) {
+        CheckScroll(sections[i], i, this.scrollY);
+      }
+    });
+  }
 </script>
 
-<div class="flex flex-col items-center gap-6 self-stretch">
+<div class="flex flex-col items-center self-stretch gap-6">
   <IntersectionObserver once element={node} let:intersecting threshold={0.5}>
-    <div bind:this={node}>
+    <section id="me" bind:this={node} class="min-h-screen">
       {#if intersecting}
         <div
           transition:fade={{ delay: 250, duration: 300 }}
-          class="flex flex-col gap-3 mt-6"
+          class="flex flex-col items-center gap-3 mt-6"
         >
-          <p class="text-heading-2 text-center font-bold">I'm Ardy.</p>
-          <p class="text-subheading-2 text-center px-5">
+        <div class="w-32 h-32 bg-gray-400 rounded-full">
+
+        </div>
+          <p class="font-bold text-center text-heading-2">I'm Ardy.</p>
+          <p class="px-5 text-center text-subheading-2">
             Your Friendly Neighborhood Developer.
           </p>
         </div>
         <div
           transition:fade={{ delay: 400, duration: 500 }}
-          class="flex items-start flex-col self-stretch px-6 gap-4 mt-6"
+          class="flex flex-col items-start self-stretch gap-4 px-6 mt-6"
         >
-          <p class="text-subheading-2 text-justify font-bold">
-            I learn many roles like,
+          <p class="font-bold text-justify text-subheading-2">
+            I learn many <br />roles like,
           </p>
-          <div class="flex gap-2 items-start content-start flex-wrap">
+          <div class="flex flex-wrap items-start content-start gap-2">
             {#each contents as content, index}
               <button
                 on:click={() => {
@@ -77,28 +105,32 @@
             {/each}
           </div>
           {#key description}
-            <div class="self-stretch" in:fade={{ delay: 250, duration: 300 }}>
+            <div
+              class="self-stretch text-justify"
+              in:fade={{ delay: 250, duration: 300 }}
+            >
               {description}
             </div>
           {/key}
         </div>
       {/if}
-    </div>
+    </section>
   </IntersectionObserver>
-  <div
+  <section
+    id="experiences"
     class="bg-[#1D5D9B] min-h-screen w-full flex justify-center items-center"
   >
     <IntersectionObserver
       element={nodeExperiences}
       let:intersecting
-      threshold={0.5}
+      threshold={1}
       once
     >
-      <div bind:this={nodeExperiences}>
+      <div id="" bind:this={nodeExperiences}>
         {#if intersecting}
           <div
             transition:fly={{ y: 250, duration: 2000 }}
-            class="flex flex-col justify-center items-start gap-6 self-stretch p-6"
+            class="flex flex-col items-start self-stretch justify-center gap-6 p-6"
           >
             <p class="text-subheading-2 font-[700] text-white">
               This is my latest experiences,
@@ -106,7 +138,7 @@
             {#each experiences as experience}
               <ol class="border-l-2 border-[#F4D160]">
                 <li>
-                  <div class="flex-start flex items-start">
+                  <div class="flex items-start flex-start">
                     <div
                       class="-ml-[7px] -mt-2 mr-3 flex flex-none items-start justify-center rounded-full bg-[#F4D160] w-[12px] h-[12px]"
                     ></div>
@@ -124,7 +156,7 @@
                           {experience.company}
                         </p>
                       </div>
-                      <div class="flex-start flex gap-1 flex-wrap">
+                      <div class="flex flex-wrap gap-1 flex-start">
                         {#each experience.skills as skill}
                           <p
                             class="px-2 py-1 rounded-[16px] border-white text-white border-[1px] text-[10px]"
@@ -142,12 +174,15 @@
         {/if}
       </div>
     </IntersectionObserver>
-  </div>
-  <div class="min-h-screen flex flex-col px-6 py-3 gap-6 justify-center w-full">
-    <p class="text-subheading-2 font-[700]">
-      I'm also have learned skills like,
+  </section>
+  <section
+    id="skills"
+    class="flex flex-col w-full min-h-screen gap-6 px-6 py-3 mt-16"
+  >
+    <p class="text-subheading-2 font-[700] tracking-tight">
+      I'm also have <br />learned skills like,
     </p>
-    <div class="flex flex-col items-center gap-3 self-stretch">
+    <div class="flex flex-col items-center self-stretch gap-3">
       <p>Tech Stacks.</p>
       <div class="flex flex-wrap">
         <p
@@ -157,15 +192,14 @@
         </p>
       </div>
     </div>
-  </div>
-  <Footer />
+  </section>
 </div>
 
 <style>
   button {
-    @apply flex p-2 rounded-[16px] border-[#1D5D9B] border-[1px];
+    @apply flex rounded-[16px] border-[1px] border-[#1D5D9B] p-2;
   }
   .active {
-    @apply bg-[#1D5D9B] text-white rounded-[16px] border-s-[#1D5D9B] p-2 flex;
+    @apply flex rounded-[16px] border-s-[#1D5D9B] bg-[#1D5D9B] p-2 text-white;
   }
 </style>
