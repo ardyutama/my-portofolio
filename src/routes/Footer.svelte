@@ -8,12 +8,18 @@
   <div class="flex flex-col items-start w-full gap-4 border-t-2">
     <div class="border-solid"></div>
     <div class="flex items-center gap-4">
-      <GithubIcon />
-      <LinkedinIcon />
+      <a href="https://github.com/ardyutama?tab=repositories">
+        <GithubIcon />
+      </a>
+      <a href="https://www.linkedin.com/in/ardy-putra-utama/">
+        <LinkedinIcon />
+      </a>
     </div>
     <div class="flex items-center gap-1">
       <p>Resume CV</p>
-      <DownloadIcon />
+      <a href="https://drive.google.com/drive/folders/1YLvqw-4UucPRMkS8nbWTmSoH19O76n-_?usp=sharing">
+        <DownloadIcon />
+      </a>
     </div>
     <p>2023 Gooddaytama</p>
   </div>

@@ -26,7 +26,7 @@
 				</p>
 			</div>
 			<div
-				class="bg-[#1D5D9B] min-h-screen flex w-full flex-col justify-center items-center gap-4 self-center p-6"
+				class="bg-[#1D5D9B] min-h-screen flex w-full flex-col justify-center items-center gap-4 self-center p-6 md:pt-16"
 			>
 				<p class="text-subheading-2 font-[700] text-white">Work.</p>
 				<p class="text-[32px] text-center font-medium text-white">
