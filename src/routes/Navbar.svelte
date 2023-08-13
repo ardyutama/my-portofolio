@@ -10,9 +10,9 @@
 	$: getPath($page.url.pathname);
 </script>
 
-<header class="sticky top-0 left-0 right-0 z-10 flex w-full px-4">
-	<nav class="relative flex items-center justify-center w-full m-auto mt-4">
-		<ul class="flex p-4 items-start gap-4 rounded-[24px] bg-[#FAFAFD] w-full justify-start">
+<header class="sticky top-0 left-0 right-0 z-10 flex items-center self-stretch w-full px-6 ">
+	<nav class="relative flex items-center justify-center w-full m-auto mt-4 md:max-w-[360px]">
+		<ul class="flex p-4 items-start gap-4 rounded-[24px] bg-[#FAFAFD] w-full justify-start md:justify-center">
 			<li>
 				<a href="/" class:active={currentPath === '/'}>
 					Home
