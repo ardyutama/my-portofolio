@@ -98,43 +98,45 @@
 			{#if intersectingExperiences}
 				<div
 					class="flex flex-col items-start self-stretch justify-center gap-6 m-6 mt-4 md:col-span-5"
-					transition:fly={{ y: 250, duration: 1500, delay: 200 }}
+					transition:fly={{ y: 250, duration: 800, delay: 200 }}
 				>
 					<p class="text-subheading-2 font-[700] text-white md:text-[24px]">
 						This is my latest experiences,
 					</p>
 					{#each experiences as experience, index}
-						<ol class="border-l-2 border-[#F4D160]">
-							<li>
-								<div class="flex items-start flex-start">
-									<div
-										class="-ml-[7px] -mt-2 mr-3 flex flex-none items-start justify-center rounded-full bg-[#F4D160] w-[12px] h-[12px]"
-									></div>
-									<div class="flex flex-col items-start self-stretch gap-2 pb-6">
-										<div class="gap-0">
-											<p class="-mt-2 text-white text-[12px] md:text-[20px]">
-												{experience.startDate} - {experience.endDate}
-											</p>
-											<p class="text-white text-[16px] md:text-[32px] font-bold">
-												{experience.position}
-											</p>
-											<p class="text-white text-[16px md:text-[32px] md:font-normal">
-												{experience.company}
-											</p>
-										</div>
-										<div class="flex flex-wrap gap-1 flex-start">
-											{#each experience.skills as skill}
-												<p
-													class="px-2 py-1 rounded-[16px] border-white text-white border-[1px] text-[12px] md:text-[16px]"
-												>
-													{skill}
+						<div in:fly|global={{ y: 250, duration: 800, delay: 400 * (index + 1) }}>
+							<ol class="border-l-2 border-[#F4D160]">
+								<li>
+									<div class="flex items-start flex-start">
+										<div
+											class="-ml-[7px] -mt-2 mr-3 flex flex-none items-start justify-center rounded-full bg-[#F4D160] w-[12px] h-[12px]"
+										></div>
+										<div class="flex flex-col items-start self-stretch gap-2 pb-6">
+											<div class="gap-0">
+												<p class="-mt-2 text-white text-[12px] md:text-[20px]">
+													{experience.startDate} - {experience.endDate}
 												</p>
-											{/each}
+												<p class="text-white text-[16px] md:text-[32px] font-bold">
+													{experience.position}
+												</p>
+												<p class="text-white text-[16px md:text-[32px] md:font-normal">
+													{experience.company}
+												</p>
+											</div>
+											<div class="flex flex-wrap gap-1 flex-start">
+												{#each experience.skills as skill}
+													<p
+														class="px-2 py-1 rounded-[16px] border-white text-white border-[1px] text-[12px] md:text-[16px]"
+													>
+														{skill}
+													</p>
+												{/each}
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-						</ol>
+								</li>
+							</ol>
+						</div>
 					{/each}
 				</div>
 			{/if}
