@@ -1,9 +1,9 @@
 <script>
 	import Project from '$lib/components/Projects.svelte';
 
-	import { fade, fly, blur } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
-
+	import { projects } from '$lib/components/Content.js';
 	let ready = false;
 	onMount(() => (ready = true));
 </script>
@@ -32,13 +32,16 @@
 				<p class="text-[32px] text-center font-medium text-white">
 					Let’s Collaborate<br />For Something Great.
 				</p>
-				<div class="flex flex-col gap-4 lg:inline-grid lg:grid-cols-12 lg:gap-6">
-					<div class="col-span-6 ">
-						<Project />
-					</div>
-          <div class="col-span-6">
-						<Project />
-					</div>
+				<div
+					class="flex flex-col gap-4 {projects.length == 1
+						? 'lg:justify-center'
+						: 'lg:inline-grid lg:grid-cols-12 lg:gap-6'}"
+				>
+					{#each projects as project, index}
+						<div class={index.length === 0 ? '' : 'col-span-6'}>
+							<Project data={project} />
+						</div>
+					{/each}
 				</div>
 			</div>
 		</div>
